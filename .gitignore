@@ -3,6 +3,7 @@
 *.iml
 *.iws
 .xml
+.lts
 
 # Maven
 log/

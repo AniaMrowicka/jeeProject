@@ -1,6 +1,6 @@
 package rest;
 
-import model.ItemModel;
+import model.ItemEntity;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,14 +12,14 @@ import java.util.Optional;
 public class ItemRestService {
 
     @GET
-    public Optional<ItemModel> getById(int id) {
-        Optional<ItemModel> item = Optional.empty();
+    public Optional<ItemEntity> getById(int id) {
+        Optional<ItemEntity> item = Optional.empty();
         return item;
     }
 
     @GET
-    public List<ItemModel> getAll() {
-        List<ItemModel> itemsList = new ArrayList<>();
+    public List<ItemEntity> getAll() {
+        List<ItemEntity> itemsList = new ArrayList<>();
         return itemsList;
     }
 }

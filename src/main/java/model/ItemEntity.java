@@ -2,26 +2,24 @@ package model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
-@Table(name="item")
+@Table(name = "item")
 public class ItemEntity {
 
     @Id
     @GeneratedValue
-    @Column(name= "id_item", nullable = false)
+    @Column(name = "id_item", nullable = false)
     private Integer id;
-    @Column(name="type")
+    @Column(name = "type")
     private NotesType type;
-    @Column(name="creation_date", nullable = false)
+    @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
-    @Column(name="modification_date", nullable = false)
+    @Column(name = "modification_date", nullable = false)
     private LocalDateTime modificationDate;
-    @Column(name="content")
+    @Column(name = "content")
     private String content;
-
-    public ItemEntity() {
-    }
 
     public Integer getId() {
         return id;
@@ -61,5 +59,22 @@ public class ItemEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ItemEntity itemEntity = (ItemEntity) o;
+        return Objects.equals(id, itemEntity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

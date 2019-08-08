@@ -1,1 +1,4 @@
-Item.class
+model\NotesType.class
+rest\ItemRestService.class
+service\ItemService.class
+model\ItemEntity.class
