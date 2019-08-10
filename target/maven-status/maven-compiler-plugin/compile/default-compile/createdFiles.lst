@@ -1,4 +1,6 @@
 model\NotesType.class
+JAXRSConfiguration.class
 rest\ItemRestService.class
-service\ItemService.class
 model\ItemEntity.class
+service\ItemService.class
+dto\ItemDTO.class
