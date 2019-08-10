@@ -1,6 +1,0 @@
-model\NotesType.class
-JAXRSConfiguration.class
-rest\ItemRestService.class
-model\ItemEntity.class
-service\ItemService.class
-dto\ItemDTO.class
