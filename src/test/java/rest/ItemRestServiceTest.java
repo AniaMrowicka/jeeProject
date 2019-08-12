@@ -26,9 +26,10 @@ public class ItemRestServiceTest {
         //given
         Mockito.when(itemRestService.getById(5)).thenReturn(Optional.empty());
         //when
-        itemRestService.getById(5);
-        //then
-        assertNotNull(itemRestService.getById(5));
+        Optional<ItemDTO> byId = itemRestService.getById(5);
+        //then(
+        assertNotNull(byId);
+        assertEquals(byId, Optional.empty());
     }
 
     @Test
@@ -43,11 +44,12 @@ public class ItemRestServiceTest {
         testedList.add(itemDTO);
 
         //when
-        Mockito.when(itemRestService.getAll()).thenReturn(testedList);
+        List<ItemDTO> all = itemRestService.getAll();
+        Mockito.when(all).thenReturn(testedList);
         //then
 
-        assertNotNull(itemRestService.getAll());
-        assertEquals(1, itemRestService.getAll().size());
+        assertNotNull(all);
+        assertEquals(1, testedList.size());
 
     }
 }
