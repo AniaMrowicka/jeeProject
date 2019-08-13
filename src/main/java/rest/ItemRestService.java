@@ -1,9 +1,11 @@
 package rest;
 
+import dto.ItemDTO;
 import model.ItemEntity;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,14 +14,15 @@ import java.util.Optional;
 public class ItemRestService {
 
     @GET
-    public Optional<ItemEntity> getById(int id) {
-        Optional<ItemEntity> item = Optional.empty();
+    @Path("/{id}")
+    public Optional<ItemDTO> getById(@PathParam("id") int id) {
+        Optional<ItemDTO> item = Optional.empty();
         return item;
     }
-
+    //
     @GET
-    public List<ItemEntity> getAll() {
-        List<ItemEntity> itemsList = new ArrayList<>();
+    public List<ItemDTO> getAll() {
+        List<ItemDTO> itemsList = new ArrayList<>();
         return itemsList;
     }
 }
