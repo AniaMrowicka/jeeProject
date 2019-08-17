@@ -9,10 +9,11 @@ import java.util.Objects;
 public class ItemEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id_item", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private NotesType type;
     @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
