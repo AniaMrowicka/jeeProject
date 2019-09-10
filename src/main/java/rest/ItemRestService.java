@@ -1,51 +1,50 @@
 package rest;
 
+import dto.ItemCreateDto;
 import dto.ItemDTO;
-import model.ItemEntity;
 import model.NotesType;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import service.ItemService;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
 @Path("/item")
 public class ItemRestService {
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    @Inject
+    ItemService itemService;
 
     @GET
     @Path("/{id}")
-    public Optional<ItemDTO> getById(@PathParam("id") int id) {
-        Optional<ItemDTO> item = Optional.empty();
-        return item;
+    @Produces("application/json")
+    public ItemDTO getById(@PathParam("id") Integer id) {
+        Optional<ItemDTO> byId = itemService.getById(id);
+        if(byId.isPresent()){
+           return byId.get();
+        }
+       throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
-    //
+
+    @Produces("application/json")
     @GET
     public List<ItemDTO> getAll() {
-        List<ItemDTO> itemsList = new ArrayList<>();
-        return itemsList;
+        List<ItemDTO> all = itemService.getAll();
+        return all;
     }
+
+    @POST
+    @Consumes("application/json")
+    public void createItem (ItemCreateDto itemCreateDto){
+        itemService.createItem(itemCreateDto);
+    }
+
     @GET
-    @Path("/test")
-    @Transactional(Transactional.TxType.REQUIRED)
-    public String test() {
-        TypedQuery<ItemEntity> query = entityManager.createQuery("SELECT i FROM ItemEntity i", ItemEntity.class);
-        int size = query.getResultList().size();
-
-        ItemEntity item = new ItemEntity();
-        item.setCreationDate(LocalDateTime.now());
-        item.setType(NotesType.SCAN);
-        item.setContent("test 123");
-
-        entityManager.persist(item);
-        return String.valueOf(entityManager.isOpen());
+    @Path("/type")
+    @Produces("application/json")
+    public List<ItemDTO> getItemListByType(@QueryParam("type") NotesType type){
+        List<ItemDTO> itemListByType = itemService.getItemListByType(type);
+        return itemListByType;
     }
 }
